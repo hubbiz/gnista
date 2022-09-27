@@ -1,24 +1,25 @@
 #include <ruby.h>
 #include <sparkey/sparkey.h>
+#include <stdlib.h>
 
-typedef uint8_t bool;
+typedef uint8_t _sBool;
 #define true 1
 #define false 0
 
 
 typedef struct instance_logwriter {
 	sparkey_logwriter *logwriter;
-	bool open;
+	_sBool open;
 } instance_logwriter;
 
 typedef struct instance_logreader {
 	sparkey_logreader *logreader;
-	bool open;
+	_sBool open;
 } instance_logreader;
 
 typedef struct instance_hashreader {
 	sparkey_hashreader *hashreader;
-	bool open;
+	_sBool open;
 } instance_hashreader;
 
 /********************************************************************************/
@@ -31,7 +32,7 @@ static void raise_sparkey(sparkey_returncode returncode) {
 	rb_raise(GnistaException, "%s", error_msg);
 }
 
-static void check_open(bool open) {
+static void check_open(_sBool open) {
 	if (!open) {
 		rb_raise(GnistaException, "Closed");
 	}
